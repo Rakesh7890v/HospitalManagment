@@ -16,9 +16,9 @@ app.use(express.json())
 const port = 3400;
 const mongoURI = "mongodb+srv://hospital_manag:t4sPYoOPpzhcJUJv@hospital.1fo7856.mongodb.net/?retryWrites=true&w=majority&appName=hospital";
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoURI)
     .then(() => console.log('MongoDB connected'))
-    .catch(err => console.error(err));
+    .catch(err => console.error('Error connecting to MongoDB:', err));
 
 app.get('/',(req, res) => {
     res.json("Hello");
