@@ -9,7 +9,7 @@ const app = express()
 
 app.use(cors(
     {
-        origin: ["https://hospital-managments.vercel.app/"],
+        origin: ["https://hospital-managments.vercel.app"],
         methods: ["POST", "GET", "PUT"],
         credentials: true
     }
