@@ -7,7 +7,13 @@ const DoctorModel = require('./models/doctor')
 
 const app = express()
 
-app.use(cors())
+app.use(cors(
+    {
+        origin: ["https://hospital-managments.vercel.app/"],
+        methods: ["POST", "GET", "PUT"],
+        credentials: true
+    }
+));
 app.use(express.json())
 const port = 3400;
 mongoose.connect("mongodb+srv://hospital_manag:t4sPYoOPpzhcJUJv@hospital.1fo7856.mongodb.net/?retryWrites=true&w=majority&appName=hospital")
