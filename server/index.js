@@ -6,9 +6,10 @@ const PatientModel = require('./models/patient')
 const DoctorModel = require('./models/doctor')
 
 const app = express()
-
 app.use(cors({
-  origin: 'https://hospital-managments.vercel.app'
+  origin: 'https://hospital-managments.vercel.app',
+  methods: 'GET,POST,PUT',
+  allowedHeaders: 'Content-Type,Authorization'
 }));
 
 app.use(express.json())
