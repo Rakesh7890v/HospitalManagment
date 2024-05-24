@@ -14,7 +14,7 @@ app.use(cors({
 
 app.use(express.json())
 const port = 3400;
-const monogoURI = "mongodb+srv://hospital_manag:t4sPYoOPpzhcJUJv@hospital.1fo7856.mongodb.net/?retryWrites=true&w=majority&appName=hospital";
+const mongoURI = "mongodb+srv://hospital_manag:t4sPYoOPpzhcJUJv@hospital.1fo7856.mongodb.net/?retryWrites=true&w=majority&appName=hospital";
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
