@@ -11,13 +11,14 @@ const Patient = ({setSuccessMessage}) => {
   const [count, setCount] = useState(0);
   const [editId, setEditId] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = () => {
-    axios.get('http://localhost:3400/pdata')
+    axios.get('https://hospital-managment-api-chi.vercel.app/pdata')
       .then(result => {
         console.log(result);
         setData(result.data);
@@ -35,7 +36,7 @@ const Patient = ({setSuccessMessage}) => {
       },2000);
     } 
     else if (editId) {
-      axios.put(`http://localhost:3400/pupdate/${editId}`, { patient, age, mobile })
+      axios.put(`https://hospital-managment-api-chi.vercel.app/pupdate/${editId}`, { patient, age, mobile })
         .then(result => {
           console.log(result.data);
           fetchData();
@@ -43,7 +44,7 @@ const Patient = ({setSuccessMessage}) => {
         })
         .catch(err => console.log(err));
     } else {
-      axios.post('http://localhost:3400/patient', { patient, age, mobile })
+      axios.post('https://hospital-managment-api-chi.vercel.app/patient', { patient, age, mobile })
         .then(result => {
           console.log(result.data);
           fetchData();
@@ -62,7 +63,7 @@ const Patient = ({setSuccessMessage}) => {
   };
 
   const DataDelete = (id) => {
-    axios.delete(`http://localhost:3400/pdelete/${id}`)
+    axios.delete(`https://hospital-managment-api-chi.vercel.app/pdelete/${id}`)
       .then(result => {
         console.log(result.data);
         fetchData();

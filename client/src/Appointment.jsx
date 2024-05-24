@@ -13,6 +13,7 @@ const Appointment = ({ setSuccessMessage }) => {
   const [count, setCount] = useState(0);
   const [editId, setEditId] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     fetchData();
@@ -20,7 +21,7 @@ const Appointment = ({ setSuccessMessage }) => {
   }, []);
 
   const fetchData = () => {
-    axios.get('http://localhost:3400/adata')
+    axios.get('https://hospital-managment-api-chi.vercel.app/adata')
     .then(result => {
       const sortedData = result.data.sort((a, b) => new Date(a.date) - new Date(b.date));
       const today = new Date();
@@ -37,9 +38,9 @@ const Appointment = ({ setSuccessMessage }) => {
     })
     .catch(err => console.log(err));
   }
-  
+
   const fetchDoctor = () => {
-    axios.get('http://localhost:3400/ddata')
+    axios.get('https://hospital-managment-api-chi.vercel.app/ddata')
     .then(result => {
       console.log(result)
       setDoctor(result.data);
@@ -55,7 +56,7 @@ const Appointment = ({ setSuccessMessage }) => {
         setShowMessage(false);
       },2000);
     } else if (editId) {
-      axios.put(`http://localhost:3400/update/${editId}`, { pname, dname, date })
+      axios.put(`https://hospital-managment-api-chi.vercel.app/update/${editId}`, { pname, dname, date })
       .then(result => {
         console.log(result.data);
         fetchData();
@@ -64,7 +65,7 @@ const Appointment = ({ setSuccessMessage }) => {
       })
       .catch(err => console.log(err));
     } else {
-      axios.post('http://localhost:3400/create', { pname, dname, date })
+      axios.post('https://hospital-managment-api-chi.vercel.app/create', { pname, dname, date })
       .then(result => {
         console.log(result.data);
         fetchData();
@@ -83,7 +84,7 @@ const Appointment = ({ setSuccessMessage }) => {
   }
 
   const DataDelete = (id) => {
-    axios.delete(`http://localhost:3400/delete/${id}`)
+    axios.delete(`https://hospital-managment-api-chi.vercel.app/delete/${id}`)
     .then(result => {
       console.log(result.data);
       fetchData();
