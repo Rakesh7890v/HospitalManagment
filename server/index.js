@@ -7,13 +7,19 @@ const DoctorModel = require('./models/doctor')
 
 const app = express()
 
-app.use(cors(
-    {
-        origin: ["https://hospital-managments.vercel.app"],
-        methods: ["POST", "GET", "PUT"],
-        credentials: true
-    }
-));
+const allowedOrigins = ['https://hospital-managments.vercel.app'];
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
+    credentials: true
+}));
+
 app.use(express.json())
 const port = 3400;
 mongoose.connect("mongodb+srv://hospital_manag:t4sPYoOPpzhcJUJv@hospital.1fo7856.mongodb.net/?retryWrites=true&w=majority&appName=hospital")
